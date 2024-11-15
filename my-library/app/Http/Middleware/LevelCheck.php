@@ -16,8 +16,10 @@ class LevelCheck
      */
     public function handle(Request $request, Closure $next, ...$levels)
     {
-        if (in_array(Auth::user()->level, $levels)) {
-            return $next($request);
+        if (!Auth::user()->isDeleted) {
+            if (in_array(Auth::user()->level, $levels)) {
+                return $next($request);
+            }
         }
         abort(401);
     }

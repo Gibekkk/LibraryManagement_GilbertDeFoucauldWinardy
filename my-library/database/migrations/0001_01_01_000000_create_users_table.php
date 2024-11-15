@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->enum("level", ["librarian", "admin"]);
+            $table->boolean('isDeleted')->default(false);
             $table->timestamps();
         });
 

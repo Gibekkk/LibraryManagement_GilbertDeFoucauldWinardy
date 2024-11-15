@@ -20,6 +20,11 @@
                         {{ __('Library Data') }}
                     </x-nav-link>
                     @endif
+                    @if(Route::has('librarians') && Auth::user()->level == "admin")
+                    <x-nav-link :href="route('librarians')" :active="request()->routeIs('librarians')">
+                        {{ __('Librarians') }}
+                    </x-nav-link>
+                    @endif
                 </div>
             </div>
 

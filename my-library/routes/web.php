@@ -7,6 +7,7 @@ use App\Http\Controllers\JournalsController;
 use App\Http\Controllers\CDController;
 use App\Http\Controllers\FinalYearProjectController;
 use App\Http\Controllers\NewspaperController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -28,9 +29,8 @@ Route::middleware(['auth', 'App\Http\Middleware\LevelCheck:admin,librarian'])->g
 });
 
 Route::middleware(['auth', 'App\Http\Middleware\LevelCheck:admin'])->group(function () {
-    Route::get('/librarians', function () {
-        return view('admin.userPage');
-    });
+    Route::get('/librarians', [AdminController::class, 'librarians'])->name('librarians');
+    Route::post('/removeLibrarian', [AdminController::class, 'removeLibrarian'])->name('removeLibrarian');
 });
 
 Route::middleware(['auth', 'App\Http\Middleware\LevelCheck:librarian'])->group(function () {
