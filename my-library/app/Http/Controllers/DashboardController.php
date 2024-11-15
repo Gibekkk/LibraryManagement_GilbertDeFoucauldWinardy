@@ -11,7 +11,7 @@ class DashboardController extends Controller
     public function index()
     {
         if(Auth::id()){
-            $userLevel = Auth()->user()->level;
+            $userLevel = Auth::user()->level;
             switch($userLevel){
                 case "admin":
                     return view("admin.dashboard");

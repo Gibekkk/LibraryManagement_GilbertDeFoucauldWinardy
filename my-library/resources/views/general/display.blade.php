@@ -1,45 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Books Display</title>
-</head>
-<body>
-    <header>
-        <nav>
-            <a href="/">Home</a>
-            <a href="/cds">CDs</a>
-            <a href="/newspapers">Newspapers</a>
-            <a href="/books">Books</a>
-            <a href="/journals">Journals</a>
-            <a href="/final_year_projects">Final Year Projects</a>
-        </nav>
-    </header>
+<x-app-layout>
+    <x-slot name="header">
+        <x-nav-link :href="route('books')" :active="request()->routeIs('books')">
+            {{ __('Books') }}
+        </x-nav-link>
+        <x-nav-link :href="route('cds')" :active="request()->routeIs('cds')">
+            {{ __('CDs') }}
+        </x-nav-link>
+        <x-nav-link :href="route('newspapers')" :active="request()->routeIs('newspapers')">
+            {{ __('Newspapers') }}
+        </x-nav-link>
+        <x-nav-link :href="route('journals')" :active="request()->routeIs('journals')">
+            {{ __('Journals') }}
+        </x-nav-link>
+        <x-nav-link :href="route('final_year_projects')" :active="request()->routeIs('final_year_projects')">
+            {{ __('Final Year Projects') }}
+        </x-nav-link>
+    </x-slot>
 
-    <h1>Daftar {{ $type }}
-        <a href="/{{ $location }}/{{ $sort == 'asc' ? 'desc' : 'asc' }}">
-            (Change Order)
-        </a>
-    </h1>
-
-    <table border="1">
-        <thead>
-            <tr>
-                @foreach ($fields as $field)
-                    <th>{{ $field }}</th>
-                @endforeach
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($datas as $data)
+    <div class="py-12">
+        <h1>Daftar {{ $type }}
+            <x-nav-link :href="'/'.$location.'/'.($sort == 'asc' ? 'desc' : 'asc')">
+                {{ __('(Change Order)') }}
+            </x-nav-link>
+        </h1>
+        <table>
+            <thead>
                 <tr>
                     @foreach ($fields as $field)
-                        <td>{{ $data->{strtolower(implode("_", explode(" ", $field)))} }}</td>
+                        <th>{{ $field }}</th>
                     @endforeach
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
-</body>
-</html>
+            </thead>
+            <tbody>
+                @foreach ($datas as $data)
+                    <tr>
+                        @foreach ($fields as $field)
+                            <td>{{ $data->{strtolower(implode('_', explode(' ', $field)))} }}</td>
+                        @endforeach
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+</x-app-layout>
