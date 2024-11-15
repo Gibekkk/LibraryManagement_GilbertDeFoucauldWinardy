@@ -25,5 +25,13 @@ class DatabaseSeeder extends Seeder
             'username' => 'librarian',
             "level" => "librarian"
         ]);
+
+        $this->call([
+            BooksSeeder::class,
+            JournalsSeeder::class,
+            CDSeeder::class,
+            NewspaperSeeder::class,
+            FinalYearProjectSeeder::class,
+        ]);
     }
 }
