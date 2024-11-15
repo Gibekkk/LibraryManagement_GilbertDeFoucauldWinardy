@@ -23,9 +23,12 @@ class BooksController extends Controller
             "Penulis",
             "Tahun Terbit",
             "ISBN",
+            "Jenis Buku",
+            "Link Akses",
+            "Status Peminjaman"
         );
         $location = "books";
-        $datas = DB::select('select * from books order by judul ' . strtoupper($sort));
+        $datas = DB::select('select *, IF(isEbook, "Physical Book", "E-Book") AS jenis_buku, ebookLink as link_akses, IF(isBorrowed, "Dipinjam", "Tersedia") AS status_peminjaman FROM books order by judul ' . strtoupper($sort));
         return view('general.display', compact('datas', 'sort', 'type', 'fields', 'location'));
     }
 

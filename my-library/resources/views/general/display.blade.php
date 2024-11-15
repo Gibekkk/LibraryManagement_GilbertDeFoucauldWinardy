@@ -19,7 +19,7 @@
 
     <div class="py-12">
         <h1>Daftar {{ $type }}
-            <x-nav-link :href="'/'.$location.'/'.($sort == 'asc' ? 'desc' : 'asc')">
+            <x-nav-link :href="'/' . $location . '/' . ($sort == 'asc' ? 'desc' : 'asc')">
                 {{ __('(Change Order)') }}
             </x-nav-link>
         </h1>
@@ -29,11 +29,6 @@
                     @foreach ($fields as $field)
                         <th>{{ $field }}</th>
                     @endforeach
-                    @if($type == 'Buku')
-                        <th>Jenis Buku</th>
-                        <th>Link Akses</th>
-                        <th>Status Peminjaman</th>
-                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -42,13 +37,6 @@
                         @foreach ($fields as $field)
                             <td>{{ $data->{strtolower(implode('_', explode(' ', $field)))} }}</td>
                         @endforeach
-                        @if($type == 'Buku')
-                        <td>{{ $data->isEbook ? "E-Book" : "Physical Book" }}</td>
-                        <td><x-nav-link :href="$data->ebookLink">
-                            {{ __($data->ebookLink) }}
-                        </x-nav-link></td>
-                        <td>{{ $data->isBorrowed ? "Dipinjam" : "Tersedia" }}</td>
-                    @endif
                     </tr>
                 @endforeach
             </tbody>

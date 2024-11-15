@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name'); // Nama koran
             $table->date('publication_date'); // Tanggal terbit
-            $table->string('publisher'); // Penerbit koran
+            $table->enum('publisher', ['Kompas', 'Tribun Timur', 'Fajar']); // Penerbit koran
             $table->string('language'); // Bahasa yang dipake
             $table->timestamps();
         });

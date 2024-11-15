@@ -21,10 +21,11 @@ class NewspaperController extends Controller
             "Name",
             "Publication Date",
             "Publisher",
-            "Language"
+            "Language",
+            "Lokasi",
         );
         $location = "newspapers";
-        $datas = DB::select('select * from newspapers order by name '.strtoupper($sort));
+        $datas = DB::select('SELECT *, IF(created_at < created_at + INTERVAL 7 DAY, "Gudang", "Pajangan") AS lokasi FROM newspapers order by name '.strtoupper($sort));
         return view('general.display', compact('datas', 'sort', 'type', 'fields', 'location'));
     }
 

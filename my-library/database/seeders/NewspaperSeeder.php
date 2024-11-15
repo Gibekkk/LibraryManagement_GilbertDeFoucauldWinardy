@@ -12,13 +12,14 @@ class NewspaperSeeder extends Seeder
     {
         $faker = Faker::create();
         for ($i = 1; $i <= 10; $i++) {
+            $publishDate = $faker->dateTime();
             DB::table('newspapers')->insert([
                 'name' => $faker->company,
                 'publication_date' => $faker->date,
-                'publisher' => $faker->company,
+                'publisher' => $faker->randomElement(['Kompas', 'Tribun Timur', 'Fajar']),
                 'language' => $faker->languageCode,
-                'created_at' => \Carbon\Carbon::now(),
-                'updated_at' => \Carbon\Carbon::now(),
+                'created_at' => $publishDate,
+                'updated_at' => $publishDate,
             ]);
         }
     }
