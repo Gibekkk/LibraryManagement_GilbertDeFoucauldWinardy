@@ -12,10 +12,11 @@ class DashboardController extends Controller
     {
         if(Auth::id()){
             $userLevel = Auth()->user()->level;
-            if($userLevel == "admin"){
-                return view("admin.dashboard");
-            } else{
-                return view("dashboard");
+            switch($userLevel){
+                case "admin":
+                    return view("admin.dashboard");
+                case "librarian":
+                    return view("librarian.dashboard");
             }
         }
         return view("welcome");
