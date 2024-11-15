@@ -31,6 +31,8 @@ Route::middleware(['auth', 'App\Http\Middleware\LevelCheck:admin,librarian'])->g
 Route::middleware(['auth', 'App\Http\Middleware\LevelCheck:admin'])->group(function () {
     Route::get('/librarians', [AdminController::class, 'librarians'])->name('librarians');
     Route::post('/removeLibrarian', [AdminController::class, 'removeLibrarian'])->name('removeLibrarian');
+    Route::get('/addLibrarian', [AdminController::class, 'addLibrarian'])->name('addLibrarian');
+    Route::post('/addLibrarian', [AdminController::class, 'addLibrarianProcess'])->name('addLibrarianProcess');
 });
 
 Route::middleware(['auth', 'App\Http\Middleware\LevelCheck:librarian'])->group(function () {
