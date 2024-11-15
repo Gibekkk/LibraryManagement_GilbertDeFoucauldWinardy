@@ -10,6 +10,12 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     {{ __("You're logged in!") }}
+                    <br>
+                    {{ __(" Remember to check for updates on collections!") }}
+                    @if ((new DateTime(Auth::user()->last_update))->diff(new DateTime())->format('%a') > 3)
+                        <br>
+                        {{ __('Make An Update!') }}
+                    @endif
                 </div>
             </div>
         </div>
