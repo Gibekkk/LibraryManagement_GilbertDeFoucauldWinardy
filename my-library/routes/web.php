@@ -39,6 +39,16 @@ Route::middleware(['auth', 'App\Http\Middleware\LevelCheck:librarian'])->group(f
     Route::get('/display', function () {
         redirect('books');
     })->name('display');
+    Route::get('/add/books', [BooksController::class, 'addBook'])->name('books.add');
+    Route::post('/add/books', [BooksController::class, 'addBookProcess'])->name('books.addProcess');
+    Route::get('/add/journals', [JournalsController::class, 'addJournal'])->name('journals.add');
+    Route::post('/add/journals', [JournalsController::class, 'addJournalProcess'])->name('journals.addProcess');
+    Route::get('/add/cds', [CDController::class, 'addCD'])->name('cds.add');
+    Route::post('/add/cds', [CDController::class, 'addCDProcess'])->name('cds.addProcess');
+    Route::get('/add/newspapers', [NewspaperController::class, 'addNewspaper'])->name('newspapers.add');
+    Route::post('/add/newspapers', [NewspaperController::class, 'addNewspaperProcess'])->name('newspapers.addProcess');
+    Route::get('/add/final_year_projects', [FinalYearProjectController::class, 'addFyp'])->name('final_year_projects.add');
+    Route::post('/add/final_year_projects', [FinalYearProjectController::class, 'addFypProcess'])->name('final_year_projects.addProcess');
 });
 
 

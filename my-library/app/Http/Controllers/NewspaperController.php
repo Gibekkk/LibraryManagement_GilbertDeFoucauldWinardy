@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Newspaper;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NewspaperController extends Controller
 {
@@ -25,55 +26,28 @@ class NewspaperController extends Controller
             "Lokasi",
         );
         $location = "newspapers";
-        $datas = DB::select('SELECT *, IF(created_at < created_at + INTERVAL 7 DAY, "Gudang", "Pajangan") AS lokasi FROM newspapers order by name '.strtoupper($sort));
+        $datas = DB::select('SELECT *, IF(created_at < created_at + INTERVAL 7 DAY, "Gudang", "Pajangan") AS lokasi FROM newspapers order by name ' . strtoupper($sort));
         return view('general.display', compact('datas', 'sort', 'type', 'fields', 'location'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function addNewspaper()
     {
-        //
+        return view('librarian.create.newspaper');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function addNewspaperProcess(Request $request)
     {
-        //
-    }
+        DB::table('newspaper_request')->insert([
+            'librarianID' => Auth::user()->id,
+            'name' => $request->name,
+            'publication_date' => $request->publication_date,
+            'publisher' => $request->publisher,
+            'language' => $request->language,
+            'requestType' => "create",
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now(),
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Newspaper $newspaper)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Newspaper $newspaper)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Newspaper $newspaper)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Newspaper $newspaper)
-    {
-        //
+        return redirect()->route('newspapers')->with('success', 'Newspaper request added successfully!');
     }
 }

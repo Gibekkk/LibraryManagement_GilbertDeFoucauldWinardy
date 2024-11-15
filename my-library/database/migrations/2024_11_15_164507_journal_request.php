@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('penerbit')->nullable();
             $table->string('penulis')->nullable();
             $table->integer('tahun_terbit')->nullable();
-            $table->string('isbn')->nullable();
+            $table->string('isbn')->unique()->nullable();
             $table->enum('requestType', ['create', 'update', 'delete']);
             $table->timestamps();
             $table->index('librarianID');

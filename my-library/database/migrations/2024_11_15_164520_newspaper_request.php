@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('publication_date')->nullable(); // Tanggal terbit
             $table->enum('publisher', ['Kompas', 'Tribun Timur', 'Fajar'])->nullable(); // Penerbit koran
             $table->string('language')->nullable(); // Bahasa yang dipake
+            $table->enum('requestType', ['create', 'update', 'delete']);
             $table->timestamps();
             $table->index('librarianID');
             $table->foreign('librarianID')->references('id')->on('users')->onDelete('cascade');

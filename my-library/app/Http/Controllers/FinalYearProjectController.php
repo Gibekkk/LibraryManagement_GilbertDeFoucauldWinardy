@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\FinalYearProject;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FinalYearProjectController extends Controller
 {
@@ -25,55 +26,29 @@ class FinalYearProjectController extends Controller
             "Abstract"
         );
         $location = "final_year_projects";
-        $datas = DB::select('select * from final_year_projects order by title '.strtoupper($sort));
+        $datas = DB::select('select * from final_year_projects order by title ' . strtoupper($sort));
         return view('general.display', compact('datas', 'sort', 'type', 'fields', 'location'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function addFyp()
     {
-        //
+        return view('librarian.create.fyps');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function addFypProcess(Request $request)
     {
-        //
-    }
+        DB::table('fyp_request')->insert([
+            'librarianID' => Auth::user()->id,
+            'title' => $request->title,
+            'student_name' => $request->student_name,
+            'supervisor' => $request->supervisor,
+            'submission_year' => $request->submission_year,
+            'abstract' => $request->abstract,
+            'requestType' => "create",
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now(),
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(FinalYearProject $finalYearProject)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(FinalYearProject $finalYearProject)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, FinalYearProject $finalYearProject)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(FinalYearProject $finalYearProject)
-    {
-        //
+        return redirect()->route('final_year_projects')->with('success', 'FYP added successfully!');
     }
 }

@@ -41,5 +41,10 @@
                 @endforeach
             </tbody>
         </table>
+        @if (Route::has($location.'.add') && Auth::user()->level == "librarian")
+            <x-nav-link :href="route($location.'.add')">
+                {{ __('Tambahkan '.$type) }}
+            </x-nav-link>
+        @endif
     </div>
 </x-app-layout>

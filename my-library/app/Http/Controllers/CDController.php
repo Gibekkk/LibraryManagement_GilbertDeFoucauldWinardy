@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CD;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CDController extends Controller
 {
@@ -29,51 +30,25 @@ class CDController extends Controller
         return view('general.display', compact('datas', 'sort', 'type', 'fields', 'location'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function addCD()
     {
-        //
+        return view('librarian.create.cds');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    public function addCdProcess(Request $request)
+{
+    DB::table('cds_request')->insert([
+        'librarianID' => Auth::user()->id,
+        'title' => $request->title,
+        'artist' => $request->artist,
+        'publisher' => $request->publisher,
+        'release_year' => $request->release_year,
+        'genre' => $request->genre,
+        'created_at' => \Carbon\Carbon::now(),
+        'updated_at' => \Carbon\Carbon::now(),
+    ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(CD $cd)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(CD $cd)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, CD $cd)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(CD $cd)
-    {
-        //
-    }
+    // Redirect to the CDs list page with a success message
+    return redirect()->route('cds')->with('success', 'CD added successfully!');
+}
 }

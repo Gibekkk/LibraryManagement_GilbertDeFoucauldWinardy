@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Books;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BooksController extends Controller
 {
@@ -32,51 +33,28 @@ class BooksController extends Controller
         return view('general.display', compact('datas', 'sort', 'type', 'fields', 'location'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function addBook()
     {
-        //
+        return view('librarian.create.book');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function addBookProcess(Request $request)
     {
-        //
-    }
+        DB::table('book_request')->insert([
+            'librarianID' => Auth::user()->id,
+            'judul' => $request->judul,
+            'penerbit' => $request->penerbit,
+            'penulis' => $request->penulis,
+            'tahun_terbit' => $request->tahun_terbit,
+            'ISBN' => $request->isbn,
+            'isEbook' => $request->has('isEbook'),
+            'ebookLink' => $request->has('isEbook') ? $request->ebookLink : null,
+            'isBorrowed' => $request->has('isBorrowed'),
+            'requestType' => "create",
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now(),
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Books $books)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Books $books)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Books $books)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Books $books)
-    {
-        //
+        return redirect()->route('books')->with('success', 'Book added successfully!');
     }
 }
