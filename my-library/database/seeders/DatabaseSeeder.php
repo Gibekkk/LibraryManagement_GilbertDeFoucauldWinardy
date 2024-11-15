@@ -17,12 +17,12 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'name' => 'Test Admin',
-            'email' => 'admin@example.com',
+            'username' => 'admin',
             "level" => "admin"
         ]);
         User::factory()->create([
             'name' => 'Test Librarian',
-            'email' => 'librarian@example.com',
+            'username' => 'librarian',
             "level" => "librarian"
         ]);
     }
