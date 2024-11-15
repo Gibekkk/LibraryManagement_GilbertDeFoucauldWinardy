@@ -29,6 +29,11 @@
                     @foreach ($fields as $field)
                         <th>{{ $field }}</th>
                     @endforeach
+                    @if($type == 'Buku')
+                        <th>Jenis Buku</th>
+                        <th>Link Akses</th>
+                        <th>Status Peminjaman</th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -37,6 +42,13 @@
                         @foreach ($fields as $field)
                             <td>{{ $data->{strtolower(implode('_', explode(' ', $field)))} }}</td>
                         @endforeach
+                        @if($type == 'Buku')
+                        <td>{{ $data->isEbook ? "E-Book" : "Physical Book" }}</td>
+                        <td><x-nav-link :href="$data->ebookLink">
+                            {{ __($data->ebookLink) }}
+                        </x-nav-link></td>
+                        <td>{{ $data->isBorrowed ? "Dipinjam" : "Tersedia" }}</td>
+                    @endif
                     </tr>
                 @endforeach
             </tbody>

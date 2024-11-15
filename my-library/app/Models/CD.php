@@ -15,5 +15,7 @@ class CD extends Model
         'publisher',
         'release_year',
         'genre',
+        'isEbook',
+        'ebookLink',
     ];
 }

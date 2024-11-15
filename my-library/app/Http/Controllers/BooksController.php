@@ -22,7 +22,7 @@ class BooksController extends Controller
             "Penerbit",
             "Penulis",
             "Tahun Terbit",
-            "ISBN"
+            "ISBN",
         );
         $location = "books";
         $datas = DB::select('select * from books order by judul ' . strtoupper($sort));

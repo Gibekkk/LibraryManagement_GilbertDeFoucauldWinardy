@@ -15,5 +15,8 @@ class Books extends Model
         'penulis',
         'tahun_terbit',
         'ISBN',
+        'isEbook',
+        'ebookLink',
+        'isBorrowed',
     ];
 }

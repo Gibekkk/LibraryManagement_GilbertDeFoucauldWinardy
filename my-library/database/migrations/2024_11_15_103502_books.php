@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string('penulis');
             $table->integer('tahun_terbit');
             $table->string('isbn')->unique();
+            $table->boolean('isEbook');
+            $table->string('ebookLink')->nullable();
+            $table->boolean('isBorrowed');
             $table->timestamps();
         });
     }
