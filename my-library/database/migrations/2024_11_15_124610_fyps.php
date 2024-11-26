@@ -15,9 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('title'); // Judul proyek akhir
             $table->string('student_name'); // Nama mahasiswa yang buat
-            $table->string('supervisor'); // Nama dosen pembimbing
+            $table->bigInteger('supervisor')->unsigned(); // Nama dosen pembimbing
             $table->year('submission_year'); // Tahun penyerahan
             $table->text('abstract'); // Abstrak atau deskripsi singkat
+            $table->index('supervisor');
+            $table->foreign('supervisor')->references('id')->on('users')->onDelete("cascade");
+            $table->bigInteger('lastReadBy')->unsigned()->nullable()->default(null);
+            $table->index('lastReadBy');
+            $table->foreign('lastReadBy')->references('id')->on('users')->onDelete("cascade");
             $table->timestamps();
         });
     }

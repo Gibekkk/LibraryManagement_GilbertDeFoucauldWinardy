@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('username')->unique();
             $table->string('password');
             $table->rememberToken();
-            $table->enum("level", ["librarian", "admin"]);
+            $table->enum("level", ["librarian", "admin", "student", "lecturer"]);
             $table->boolean('isDeleted')->default(false);
             $table->date('last_update');
             $table->timestamps();
