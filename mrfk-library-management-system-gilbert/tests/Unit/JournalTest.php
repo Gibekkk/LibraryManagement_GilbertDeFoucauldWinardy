@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use App\Models\JournalRequest;
 use App\Models\Journals;
+use App\Models\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -14,14 +15,19 @@ class JournalTest extends TestCase
     /** @test */
     public function it_can_create_a_journalRequest()
     {
+        User::factory()->create([
+            'name' => 'Test Librarian',
+            'username' => 'librarian',
+            "level" => "librarian"
+        ]);
         // Arrange
         $data = [
             'librarianID' => 2,
             'judul' => "Learn UnitTesting",
-            'penerbit' => "C Makassar",
+            'penerbit' => "UC Makassar",
             'penulis' => "Gibek",
             'tahun_terbit' => 2020,
-            'isbn' => "1234",
+            'ISBN' => "1234",
             'requestType' => "create",
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now(),
@@ -45,10 +51,10 @@ class JournalTest extends TestCase
         // Arrange
         $data = [
             'judul' => "Learn UnitTesting",
-            'penerbit' => "C Makassar",
+            'penerbit' => "UC Makassar",
             'penulis' => "Gibek",
             'tahun_terbit' => 2020,
-            'isbn' => "1234",
+            'ISBN' => "1234",
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now(),
         ];
@@ -57,11 +63,11 @@ class JournalTest extends TestCase
         $journal = Journals::create($data);
 
         // Assert
-        $this->assertInstanceOf(JournalRequest::class, $journal);
+        $this->assertInstanceOf(Journals::class, $journal);
         $this->assertEquals("Learn UnitTesting", $journal->judul);
         $this->assertEquals("UC Makassar", $journal->penerbit);
         $this->assertEquals("Gibek", $journal->penulis);
         $this->assertEquals(2020, $journal->tahun_terbit);
-        $this->assertEquals("1234", $journal->ISBN);
+        $this->assertEquals("1234", $journal->isbn);
     }
 }
