@@ -44,6 +44,7 @@ class CDController extends Controller
         'publisher' => $request->publisher,
         'release_year' => $request->release_year,
         'genre' => $request->genre,
+        'requestType' => "create",
         'created_at' => \Carbon\Carbon::now(),
         'updated_at' => \Carbon\Carbon::now(),
     ]);

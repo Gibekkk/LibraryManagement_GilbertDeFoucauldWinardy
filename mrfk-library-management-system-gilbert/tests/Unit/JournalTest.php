@@ -22,7 +22,7 @@ class JournalTest extends TestCase
         ]);
         // Arrange
         $data = [
-            'librarianID' => 2,
+            'librarianID' => 4,
             'judul' => "Learn UnitTesting",
             'penerbit' => "UC Makassar",
             'penulis' => "Gibek",
@@ -38,7 +38,7 @@ class JournalTest extends TestCase
 
         // Assert
         $this->assertInstanceOf(JournalRequest::class, $requestJournal);
-        $this->assertEquals(2, $requestJournal->librarianID);
+        $this->assertEquals(4, $requestJournal->librarianID);
         $this->assertEquals("Learn UnitTesting", $requestJournal->judul);
         $this->assertEquals("UC Makassar", $requestJournal->penerbit);
         $this->assertEquals("Gibek", $requestJournal->penulis);
