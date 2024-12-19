@@ -9,6 +9,8 @@ class Journals extends Model
 {
     use HasFactory;
 
+    protected $table = 'journals';
+
     protected $fillable =[
         'judul',
         'penerbit',

@@ -5,19 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CD extends Model
+class NewspaperRequest extends Model
 {
     use HasFactory;
 
-    protected $table = 'cds';
+    protected $table = 'newspaper_request';
 
     protected $fillable = [
-        'title',
-        'artist',
+        'name',
+        'librarianID',
+        'publication_date',
         'publisher',
-        'release_year',
-        'genre',
-        'isEbook',
-        'ebookLink',
+        'language',
+        'requestType',
     ];
 }

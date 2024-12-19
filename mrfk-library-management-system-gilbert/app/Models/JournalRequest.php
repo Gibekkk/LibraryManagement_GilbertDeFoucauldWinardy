@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BookRequest extends Model
+class JournalRequest extends Model
 {
     use HasFactory;
 
-    protected $table = 'book_request';
+    protected $table = 'journal_request';
 
     protected $fillable =[
         'judul',
@@ -18,9 +18,6 @@ class BookRequest extends Model
         'penulis',
         'tahun_terbit',
         'ISBN',
-        'isEbook',
-        'ebookLink',
-        'isBorrowed',
         'requestType',
     ];
 }

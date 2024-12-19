@@ -9,6 +9,8 @@ class Newspaper extends Model
 {
     use HasFactory;
 
+    protected $table = 'newspapers';
+
     protected $fillable = [
         'name',
         'publication_date',
