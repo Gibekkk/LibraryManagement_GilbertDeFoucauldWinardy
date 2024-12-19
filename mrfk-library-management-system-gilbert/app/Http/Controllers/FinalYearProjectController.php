@@ -21,24 +21,18 @@ class FinalYearProjectController extends Controller
         $fields = array(
             "Title",
             "Student Name",
-            "Supervisor Name",
+            "Supervisor",
             "Submission Year",
             "Abstract"
         );
         $location = "final_year_projects";
-        $datas = DB::select('select *, users.name as supervisor_name from final_year_projects inner join users on users.id = final_year_projects.supervisor WHERE users.level = "lecturer" order by title ' . strtoupper($sort));
+        $datas = DB::select('select * from final_year_projects order by title ' . strtoupper($sort));
         return view('general.display', compact('datas', 'sort', 'type', 'fields', 'location'));
     }
 
     public function addFyp()
     {
-        $lecturerDatas = DB::select('select users.username as username, users.name as name from users where users.level = "lecturer" and (select count(id) from final_year_projects where supervisor = users.id) < 2');
-        $lecturers = [];
-        foreach($lecturerDatas as $lecturer){
-            $lecturers[$lecturer->username] = $lecturer->name;
-        }
-        // var_dump($lecturers);
-        return view('librarian.create.fyps', compact("lecturers"));
+        return view('librarian.create.fyps');
     }
 
     public function addFypProcess(Request $request)

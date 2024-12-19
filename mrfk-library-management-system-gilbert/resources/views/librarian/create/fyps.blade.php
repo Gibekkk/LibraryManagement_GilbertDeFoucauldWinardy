@@ -26,7 +26,7 @@
             <!-- Supervisor -->
             <div class="mt-4">
                 <x-input-label for="supervisor" :value="__('Supervisor')" />
-                <x-select name="supervisor" :options="{{$lecturers}}" :selected="old('supervisor')" />
+                <x-text-input id="supervisor" class="block mt-1 w-full" type="text" name="supervisor" :value="old('supervisor')" required />
                 <x-input-error :messages="$errors->get('supervisor')" class="mt-2" />
             </div>
 

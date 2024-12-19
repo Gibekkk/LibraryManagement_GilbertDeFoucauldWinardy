@@ -29,7 +29,7 @@ class BooksController extends Controller
             "Status Peminjaman"
         );
         $location = "books";
-        $datas = DB::select('select *, IF(isEbook, "E-Book", "Physical Book") AS jenis_buku, ebookLink as link_akses, IF(isBorrowed, "Dipinjam", "Tersedia") AS status_peminjaman FROM books order by judul ' . strtoupper($sort));
+        $datas = DB::select('select *, IF(isEbook, "Physical Book", "E-Book") AS jenis_buku, ebookLink as link_akses, IF(isBorrowed, "Dipinjam", "Tersedia") AS status_peminjaman FROM books order by judul ' . strtoupper($sort));
         return view('general.display', compact('datas', 'sort', 'type', 'fields', 'location'));
     }
 

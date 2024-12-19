@@ -25,21 +25,6 @@ class DatabaseSeeder extends Seeder
             'username' => 'librarian',
             "level" => "librarian"
         ]);
-        User::factory()->create([
-            'name' => 'Test Student',
-            'username' => 'student',
-            "level" => "student"
-        ]);
-        User::factory()->create([
-            'name' => 'Test Lecturer',
-            'username' => 'lecturer',
-            "level" => "lecturer"
-        ]);
-        User::factory()->create([
-            'name' => 'Test Lecturer2',
-            'username' => 'lecturer2',
-            "level" => "lecturer"
-        ]);
 
         $this->call([
             BooksSeeder::class,

@@ -17,10 +17,6 @@ class DashboardController extends Controller
                     return view("admin.dashboard");
                 case "librarian":
                     return view("librarian.dashboard");
-                case "student":
-                    return view("student.dashboard");
-                case "lecturer":
-                    return view("lecturer.dashboard");
             }
         }
         return view("welcome");
